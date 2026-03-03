@@ -3,10 +3,8 @@ import requests
 import json
 
 # ---------------- CONFIG ----------------
-server = 'YOUR_SERVER_NAME'           # e.g., 'localhost\\SQLEXPRESS'
+server = 'localhost\\SQLEXPRESS'
 database = 'YOUR_DATABASE_NAME'
-username = 'YOUR_DB_USERNAME'
-password = 'YOUR_DB_PASSWORD'
 table_name = 'ZZZ_vw_SevkiyatPlanlama_App_01'
 endpoint = 'https://ycl.co.ke/dynamics-shipment-status.php'
 
@@ -21,13 +19,12 @@ columns = [
     "KUTU_SAYISI"
 ]
 
-# ---------------- CONNECT TO SQL SERVER ----------------
+# ---------------- CONNECT TO SQL SERVER (Windows Auth) ----------------
 conn_str = (
     'DRIVER={ODBC Driver 17 for SQL Server};'
     f'SERVER={server};'
     f'DATABASE={database};'
-    f'UID={username};'
-    f'PWD={password}'
+    'Trusted_Connection=yes;'
 )
 
 try:
@@ -47,7 +44,12 @@ try:
     data_list = []
 
     for row in rows:
-        row_dict = {columns[i]: row[i] for i in range(len(columns))}
+        row_dict = {}
+        for i, col in enumerate(columns):
+            value = row[i]
+            if hasattr(value, 'isoformat'):
+                value = value.isoformat()
+            row_dict[col] = value
         data_list.append(row_dict)
 
     print(f"Read {len(data_list)} rows from the database.")
