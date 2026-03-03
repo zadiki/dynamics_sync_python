@@ -1,10 +1,11 @@
 import pyodbc
 import requests
 import json
+from decimal import Decimal
 
 # ---------------- CONFIG ----------------
-server = 'localhost\\SQLEXPRESS'
-database = 'YOUR_DATABASE_NAME'
+server = '.'
+database = 'DynamicsVer2022'
 table_name = 'ZZZ_vw_SevkiyatPlanlama_App_01'
 endpoint = 'https://ycl.co.ke/dynamics-shipment-status.php'
 
@@ -21,10 +22,11 @@ columns = [
 
 # ---------------- CONNECT TO SQL SERVER (Windows Auth) ----------------
 conn_str = (
-    'DRIVER={ODBC Driver 17 for SQL Server};'
+    'DRIVER={ODBC Driver 18 for SQL Server};'
     f'SERVER={server};'
     f'DATABASE={database};'
     'Trusted_Connection=yes;'
+    'Encrypt=no;'
 )
 
 try:
@@ -49,6 +51,12 @@ try:
             value = row[i]
             if hasattr(value, 'isoformat'):
                 value = value.isoformat()
+
+            # Handle Decimals <--- ADD THIS
+            elif isinstance(value, Decimal):
+                value = float(value)
+
+
             row_dict[col] = value
         data_list.append(row_dict)
 
