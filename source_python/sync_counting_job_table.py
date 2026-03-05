@@ -1,8 +1,8 @@
 import requests
-from db_config import DynamicsDB, serialize_row
+from db_config import DynamicsDB, serialize_row,APIConfig
 
 # The endpoint for the Job Table handler we just created
-ENDPOINT = 'https://ycl.co.ke/athcountingjobtable.php'
+ENDPOINT = f"{APIConfig.BASE_URL}/athcountingjobtable.php"
 
 # The table and column configuration
 TABLE_NAME = 'ATHCOUNTINGJOBTABLE'
@@ -40,7 +40,8 @@ def run_sync():
         if data_list:
             print(f"Posting data to {ENDPOINT}...")
             # Increase timeout for larger data sets
-            response = requests.post(ENDPOINT, json=data_list, timeout=60)
+            response = requests.post(ENDPOINT, json=data_list,headers=APIConfig.get_headers(), 
+                timeout=120)
             response.raise_for_status()
             
             result = response.json()

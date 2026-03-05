@@ -1,7 +1,7 @@
 import requests
-from db_config import DynamicsDB, serialize_row
+from db_config import DynamicsDB, serialize_row,APIConfig
 
-ENDPOINT = 'https://ycl.co.ke/dynamics-shipment-status.php'
+ENDPOINT = f"{APIConfig.BASE_URL}/dynamics-shipment-status.php"
 TABLE_NAME = 'ZZZ_vw_SevkiyatPlanlama_App_01'
 COLUMNS = [
     "SALESID", "REMAININGQTY", "SALESNAME", "REMAINSALESPHYSICAL",
@@ -21,7 +21,8 @@ def run_sync():
             print(f"Read {len(data_list)} rows.")
 
         if data_list:
-            response = requests.post(ENDPOINT, json=data_list, timeout=30)
+            response = requests.post(ENDPOINT, json=data_list,headers=APIConfig.get_headers(), 
+                timeout=120)
             response.raise_for_status()
             print("Sync successful!")
 

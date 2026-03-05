@@ -1,8 +1,8 @@
 import requests
-from db_config import DynamicsDB, serialize_row
+from db_config import DynamicsDB, serialize_row,APIConfig
 
 # The endpoint for the Job Line handler
-ENDPOINT = 'https://ycl.co.ke/athcountingjobline.php'
+ENDPOINT = f"{APIConfig.BASE_URL}/athcountingjobline.php"
 
 # The table configuration
 LINE_TABLE = 'ATHCOUNTINGJOBLINE'
@@ -43,7 +43,8 @@ def run_sync():
         if data_list:
             print(f"Posting data to {ENDPOINT}...")
             # Using a generous timeout as lines can be numerous
-            response = requests.post(ENDPOINT, json=data_list, timeout=120)
+            response = requests.post(ENDPOINT, json=data_list,headers=APIConfig.get_headers(), 
+                timeout=120)
             response.raise_for_status()
             
             result = response.json()

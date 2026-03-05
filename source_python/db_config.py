@@ -38,3 +38,17 @@ def serialize_row(row, columns):
             val = float(val)
         row_dict[col] = val
     return row_dict
+
+# db_config.py (Add this section)
+
+class APIConfig:
+    """Centralized configuration for API communication"""
+    BASE_URL = 'https://ycl.co.ke'
+    API_KEY = '4f9a2b8c5e1d7f3a9b0c2e4d6f8a1b3c5e7d9f0a2b4c6d8e0f1a3b5c7d9e1f'  # Replace with the key from your PHP config.php
+    
+    @classmethod
+    def get_headers(cls):
+        return {
+            'X-API-KEY': cls.API_KEY,
+            'Content-Type': 'application/json'
+        }
