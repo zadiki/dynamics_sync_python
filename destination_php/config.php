@@ -11,13 +11,14 @@ function validateApiKey() {
     $headers = getallheaders();
     
     // Check if the 'X-API-KEY' header exists and matches our constant
-    $receivedKey = isset($headers['X-API-KEY']) ? $headers['X-API-KEY'] : null;
+    $receivedKey = isset($_SERVER['HTTP_X_API_KEY']) ? $_SERVER['HTTP_X_API_KEY'] : null;
 
     if ($receivedKey !== Config::API_KEY) {
         http_response_code(401); // Unauthorized
         echo json_encode([
             "success" => false, 
-            "error" => "Invalid or missing API Key"
+            "error" => "Invalid or missing API Key",
+            "sent_key"=>$receivedKey,     
         ]);
         exit; // Stop further execution
     }

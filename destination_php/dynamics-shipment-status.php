@@ -1,11 +1,14 @@
 <?php
 require_once 'db.php';
+require_once 'config.php'; // 1. Include the config
 
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Headers: Content-Type, X-API-KEY"); // 2. Allow the header
 
+// 3. Run the security check
+validateApiKey();
 $pdo = getDBConnection();
 $method = $_SERVER['REQUEST_METHOD'];
 
