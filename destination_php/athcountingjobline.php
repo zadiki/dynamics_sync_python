@@ -88,7 +88,7 @@ function handlePostJobline($pdo) {
         $pdo->beginTransaction();
 
         // 1. Clear the table before the new import
-        $pdo->exec("TRUNCATE TABLE ATHCOUNTINGJOBLINE");
+        $pdo->exec("DELETE FROM ATHCOUNTINGJOBLINE");
 
         // 2. Prepare the Insert statement (14 placeholders for your 14 columns)
         $placeholders = implode(',', array_fill(0, count($columns), '?'));

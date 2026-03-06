@@ -71,7 +71,7 @@ function handlePost($pdo) {
         $pdo->beginTransaction();
 
         // 1. Clear existing data
-        $pdo->exec("TRUNCATE TABLE SevkiyatPlanlama_App_01");
+        $pdo->exec("DELETE FROM SevkiyatPlanlama_App_01");
 
         // 2. Prepare Insert
         $sql = "INSERT INTO SevkiyatPlanlama_App_01 

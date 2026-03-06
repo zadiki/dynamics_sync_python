@@ -68,6 +68,7 @@ function handlePostJobTable($pdo) {
 
     // Comprehensive column list for ATHCOUNTINGJOBTABLE
     $columns = [
+        "ATHCOUNTINGJOBID",
         "ATHCOUNTINGJOBSTATUS",
         "COUNTEDINVENTLOCATIONID",
         "INVENTLOCATIONIDFILLEDFROM",
@@ -92,7 +93,7 @@ function handlePostJobTable($pdo) {
         $pdo->beginTransaction();
 
         // 1. Wipe existing table data
-        $pdo->exec("TRUNCATE TABLE ATHCOUNTINGJOBTABLE");
+        $pdo->exec("DELETE FROM ATHCOUNTINGJOBTABLE");
 
         // 2. Prepare dynamic insert
         $colString = implode(',', $columns);
