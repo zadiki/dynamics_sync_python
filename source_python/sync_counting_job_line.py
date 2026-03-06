@@ -45,6 +45,9 @@ def run_sync():
             # Using a generous timeout as lines can be numerous
             response = requests.post(ENDPOINT, json=data_list,headers=APIConfig.get_headers(), 
                 timeout=120)
+            print("POST request sent.")
+            print("Response status code:", response.status_code)
+            print("Response body:", response.text)
             response.raise_for_status()
             
             result = response.json()
