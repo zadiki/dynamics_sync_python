@@ -21,8 +21,12 @@ def run_sync():
             print(f"Read {len(data_list)} rows.")
 
         if data_list:
+            print("started sending to server")
             response = requests.post(ENDPOINT, json=data_list,headers=APIConfig.get_headers(), 
                 timeout=120)
+            print("POST request sent.")
+            print("Response status code:", response.status_code)
+            print("Response body:", response.text)
             response.raise_for_status()
             print("Sync successful!")
 
