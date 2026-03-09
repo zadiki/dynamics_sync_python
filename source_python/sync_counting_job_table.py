@@ -1,5 +1,10 @@
 import requests
 from db_config import DynamicsDB, serialize_row,APIConfig
+from unfullfillment_amount import run_sync_unfullfilled_amount
+from pending_invoice_amount import run_sync_pending_invoice_amount
+from dates import run_sync_dates
+from unfullfillement_reason import run_sync_reasons
+from sales_order_count import run_sync_no_of_order
 
 # The endpoint for the Job Table handler we just created
 ENDPOINT = f"{APIConfig.BASE_URL}/athcountingjobtable.php"
@@ -60,3 +65,8 @@ def run_sync():
 
 if __name__ == "__main__":
     run_sync()
+    run_sync_unfullfilled_amount()
+    run_sync_pending_invoice_amount()
+    run_sync_dates()
+    run_sync_reasons()
+    run_sync_no_of_order()
