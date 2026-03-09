@@ -1,0 +1,30 @@
+//Unfullfillment amount
+select  ATHCUSTOMERDESCRIPTION as 'Description',
+SUMOFUNFULFILLEDAMOUNT as 'UnfulfilledAmount',
+SUMOFSALESAMOUNT as 'OrderAmount' ,AVGOFPERCENTUNFULFILLED as 'FulfillmentPercent'
+from ATHSALESORDERSUMMARY01A
+//pending invoice amount
+select  ATHCUSTOMERDESCRIPTION as 'Description',
+SUMOFPENDINGINVOICEAMOUNT as 'PendingInvoiceAmount' ,
+SUMOFSALESAMOUNT,
+AVGOFPERCENTUNFULFILLED
+from ATHSALESORDERSUMMARY01B
+//pending delivery amount
+select  ATHCUSTOMERDESCRIPTION as 'Description',
+SUMOFPENDINGDELIVERYAMOUNT as 'PendingDeliveryAmount' ,
+SUMOFSALESAMOUNT,
+AVGOFPERCENT from ATHSALESORDERSUMMARY01C
+//dates
+SELECT DESCRIPTION,FROMDATE,TODATE FROM Athsalesordersummaryreport
+ //unfullfillment reasons
+ select ITEMNAME as 'Description',SUMOFV1AMOUNT as 'Unfullfillmentamount',AVGOFPERCENT as 'FullfillmentPercent' 
+  from ATHSALESORDERSUMMARY01E
+//no of order ps
+Select DESCRIPTION,FROMDATE,TODATE,NOOFORDER,NOOFCPS,NOOFCIJ from ATHSALESORDERCOUNTS01
+//order status
+Select DESCRIPTION,FROMDATE,TODATE,Status1 as 'OpenOrder',Status2 as 'Delivered',Status3 as 'invoiced',Status4 as 'cancelled' 
+  from ATHSALESORDERCOUNTS02
+//item analysis last 90 days
+select ITEMNAME,MOSTRECENTINVOICEDATE as 'LatInvoiceDate',MOSTRECENTORDERDATE as 'LastOrderDate' ,
+MOSTRECENTPRODDATE,UNFULFILLEDAMOUNT90DAYS,DAYLASTSALES
+from ATHSALESORDERSUMMARY01G
