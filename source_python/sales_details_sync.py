@@ -7,7 +7,7 @@ ENDPOINT = f"{APIConfig.BASE_URL}/sales_joined_sync.php"
 def run_joined_sync():
     # The complex multi-table JOIN query
     sql_query = """
-        SELECT TOP 100 
+        SELECT 
             st.SALESID, sl.ITEMID, inv.ITEMNAME, sl.SALESQTY,
             idm.INVENTLOCATIONID, idm.INVENTSITEID, sl.SALESUNIT, 
             sl.SALESPRICE, sl.FREEOFCHARGE, sl.LINEDISC, sl.LINEPERCENT, 
