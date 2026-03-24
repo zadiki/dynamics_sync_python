@@ -2,7 +2,7 @@ import requests
 from db_config import DynamicsDB, serialize_row, APIConfig
 
 # Update this to match your actual PHP filename
-ENDPOINT = f"{APIConfig.BASE_URL}/sales_sync.php"
+ENDPOINT = f"{APIConfig.BASE_URL}/sales_table_data.php"
 
 def run_sales_sync():
     # Your specific SQL query

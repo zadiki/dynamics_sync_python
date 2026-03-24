@@ -2,7 +2,7 @@ import requests
 from db_config import DynamicsDB, serialize_row, APIConfig
 
 # Pointing to the new joined handler
-ENDPOINT = f"{APIConfig.BASE_URL}/sales_joined_sync.php"
+ENDPOINT = f"{APIConfig.BASE_URL}/sales_table_detail_data.php"
 
 def run_joined_sync():
     # The complex multi-table JOIN query
