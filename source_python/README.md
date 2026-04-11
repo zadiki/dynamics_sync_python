@@ -9,6 +9,8 @@ This README describes the purpose and usage of each script in the `source_python
 - **API Communication:** Data is sent to PHP endpoints using HTTP POST requests with the `requests` library.
 - **Configuration:** API base URL and headers are managed via `APIConfig` (assumed to be in `db_config.py`).
 - **Serialization:** SQL rows are converted to JSON using the `serialize_row` utility.
+- **Base Api:** https://ycl.co.ke/destination-data/
+
 
 ---
 
