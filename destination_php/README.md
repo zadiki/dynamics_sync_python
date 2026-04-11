@@ -9,6 +9,7 @@ This document describes all available endpoints in the `destination_php` directo
 - **CORS:** All endpoints allow cross-origin requests.
 - **Methods:** All endpoints support `GET` and `POST` unless otherwise noted.
 - **Content-Type:** All endpoints return `application/json`.
+- **Base-API** https://ycl.co.ke/destination-data/
 
 ---
 
